@@ -1,0 +1,98 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "commix"
+dynamic = ["version"]
+description = "AI-Powered Smart Git Commit Assistant"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.8"
+authors = [
+    { name = "DocJlm", email = "1952199902@qq.com" },
+]
+keywords = [
+    "git",
+    "commit",
+    "ai",
+    "cli",
+    "conventional-commits",
+    "gitmoji",
+    "automation",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Utilities",
+]
+dependencies = [
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+claude = ["anthropic>=0.8.0"]
+all = [
+    "openai>=1.0.0",
+    "anthropic>=0.8.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.0",
+    "flake8>=6.0.0",
+]
+
+[project.scripts]
+commix = "commix.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/DocJlm/commix"
+Documentation = "https://github.com/DocJlm/commix#readme"
+Repository = "https://github.com/DocJlm/commix.git"
+Issues = "https://github.com/DocJlm/commix/issues"
+
+[tool.hatch.version]
+path = "commix/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/commix",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py38', 'py39', 'py310', 'py311', 'py312']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
